@@ -1,4 +1,4 @@
-# Picking
+# Muting scripts
 
 Efficient manual muting scripts.
 
