@@ -20,9 +20,9 @@ def from_param_sa(str,*default) ## stand alone from_param
 end
 
 MSG= <<END
-	Gpl Mute Interpolator : read polyg.#### files and interpolate skipped polygons
+	Gpl Mute Interpolator : read polygon files and interpolate skipped polygons
 	Usage :
-		#{File.basename(__FILE__)} first=[] last=[] step=[]
+		#{File.basename(__FILE__)} first=[] last=[] [optional parameters]
 	Required parameters :
 		first	: shot number of the first shotgather
 		last	: shot number of the last shotgather
@@ -39,13 +39,6 @@ First=from_param_sa('first').to_i
 Last=from_param_sa('last').to_i
 Step=from_param_sa('step',Last-First).to_i
 ldigit=from_param_sa('ldigit',4)
-
-# get min. tracf
-#tracfmin=Hash.new
-#File.open('tracf.min','r').each do |line|
-#	key,val=line.split(' ')
-#	tracfmin[key.to_i]=val.to_i
-#end
 
 # initialize
 x=1 # for index in dat1 and dat2
@@ -68,17 +61,6 @@ First.step(Last-1,Step) do |inum|
 	end
 	# sort data by x
 	
-#	# remove reversed data
-#	del=nil
-#	0.upto(dat1x.size-2) {|i| del=i if dat1x[i] > dat1x[i+1]}
-#	if del
-#		0.upto(del) do
-#			dat1x.shift
-#			dat1t.shift
-#		end
-#		puts dat1x,dat1t
-#	end
-
 	# read polygon data2
 	File.open(pdir+"polyg.#{sprintf("%0#{ldigit}d",inum+Step)}",'r').each do |line|
 	        dat2t << line.split(' ')[t].to_f
@@ -86,17 +68,6 @@ First.step(Last-1,Step) do |inum|
 	end
 	# sort data by x
 	
-#	# remove reversed data
-#	del=nil
-#	0.upto(dat2x.size-2) {|i| del=i if dat2x[i] > dat2x[i+1]}
-#	if del
-#		0.upto(del) do
-#			dat2x.shift
-#			dat2t.shift
-#		end
-#		puts dat2x,dat2t
-#	end
-
 	# make xindex including dat1x and dat2x
 	dat1x.each {|e| xindex << e }
 	dat2x.each {|e| xindex << e }
@@ -124,13 +95,6 @@ First.step(Last-1,Step) do |inum|
 
 			lid=dat1x.index(low)
 			uid=dat1x.index(up)
-			#unless lid and uid
-			#	puts "ix=#{ix}"
-			#	puts "low,up=#{low},#{up}"
-			#	puts "lid,uid=#{lid},#{uid}"
-			#	puts 'error #1'
-			#	exit 1
-			#end
 
 			if lid and uid
 				intp = (up-ix)*dat1t[lid] + (ix-low)*dat1t[uid]
@@ -145,12 +109,10 @@ First.step(Last-1,Step) do |inum|
 			end
 
 			n1t << intp
-			#print ix,' ', intp, " 1n\n"
 		end
 
 		if dat2x.include?(ix)
 			n2t << dat2t[dat2x.index(ix)]
-			#print ix,' ', dat2t[dat2x.index(ix)], " 2y\n"
 		else
 			arrtmp=Array.new
 			dat2x.each { |e| arrtmp << e if e < ix }
@@ -159,16 +121,8 @@ First.step(Last-1,Step) do |inum|
 			dat2x.each { |e| arrtmp << e if e > ix }
 			up = arrtmp.min
 
-			#print 'ix=',ix,' low=',low,' up=',up,"\n"
 			lid=dat2x.index(low)
 			uid=dat2x.index(up)
-			#unless lid and uid
-			#	puts "ix=#{ix}"
-			#	puts "low,up=#{low},#{up}"
-			#	puts "lid,uid=#{lid},#{uid}"
-			#	puts 'error #2'
-			#	exit 1
-			#end
 
 			if lid and uid
 				intp = (up-ix)*dat2t[lid] + (ix-low)*dat2t[uid]
@@ -182,7 +136,6 @@ First.step(Last-1,Step) do |inum|
 				exit 1
 			end
 			n2t << intp
-			#print ix,' ', intp, " 2n\n"
 		end
 	end
 
@@ -204,7 +157,6 @@ First.step(Last-1,Step) do |inum|
 
 		File.open(pdir+"polyg.#{jnum}",'w') do |f|
 			0.upto(xindex.size-1) do |i|
-				#f.write("#{interpolated[i]} #{xindex[i]+tracfmin[jj]}\n")
 				f.write("#{interpolated[i]} #{xindex[i]+1}\n")
 			end
 		end

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script name :
 
-for file in muteshot.??????
+for file in muteshot.*
 do
 	echo $file
 	bak=${file}.bak

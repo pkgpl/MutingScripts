@@ -89,10 +89,6 @@ mkdir(pdir)
 outfile=from_param_sa('fout','muteshot')
 outfile=odir+'/'+outfile
 #puts outfile, pdir
-#perc=from_param_sa('perc',85)
-#height=from_param_sa('hbox',1000)
-#width=from_param_sa('wbox',1270)
-#x1end=from_param_sa('x1end',nil)
 #d2=from_param_sa('d2',nil)
 #dt=from_param_sa('dt',0.004)
 ldigit=from_param_sa('ldigit',4)
@@ -150,16 +146,7 @@ First.step(Last,Step) do |jj|
 					warn=''
 					plotcmd=''
 				end
-				#command= "suximage < #{outfile}.#{jnum} perc=#{perc} title=#{jnum} key=tracf wbox=#{width} hbox=#{height} xbox=0 ybox=0 label2='#{warn}' f1=0 d1=#{dt} f2=1 d2=1" 
-				#command+=" x1end=#{x1end}" if x1end
-				#command+=plotcmd
-				#puts command
-				#system command
-
-				#puts 'ok? [ (y)es or enter | (r)eplace | (n)ot good | (q)uit ]'
-				#answer = gets.chomp
 				answer = 'y'
-				#curvecolor='green' if answer == 'r'
 			else
 				puts "#{polyg} file size=0, please save mouse pick in suximage"
 				puts '(r)edo | (q)uit'
@@ -174,47 +161,7 @@ First.step(Last,Step) do |jj|
 			answer = 'n'
 		end
 
-		#case answer
-		#when '', 'y'
-
-		#	## good
-			checkagain=false
-
-		#when 'r'
-
-		#	## find npair
-		#	linecount=0
-		#	File.open(polyg,'r').each do |line|
-		#		linecount+=1
-		#	end
-		#	npair=linecount
-
-		#	## replace!
-		#	repolyg="repolyg.#{jnum}"
-		#	command= "suximage < #{tmpfile} perc=#{perc} mpicks=#{repolyg} key=tracf wbox=#{width} hbox=#{height}  f1=0 d1=#{dt} f2=1 d2=1"
-		#       	command+=" xbox=0 ybox=0 title=#{jnum} curve=#{polyg} curvecolor=#{curvecolor} npair=#{npair} "
-		#	command+=" x1end=#{x1end}" if x1end
-		#	system command
-
-		#	error_sa(repolyg+" file size == 0") if File.size(repolyg) == 0
-
-		#	## merge repolyg.#### to polyg.####
-		#	merger(repolyg, polyg)
-		#	system "rm #{repolyg} &"
-
-		#when 'q'
-		#	exit 1
-
-		#else
-
-		#	## not good, redo! 
-		#	command= "suximage < #{tmpfile} perc=#{perc} mpicks=#{polyg} key=tracf wbox=#{width} hbox=#{height} f1=0 d1=#{dt} f2=1 d2=1"
-		#	command+=" xbox=0 ybox=0 title=#{jnum} "
-		#	command+=" x1end=#{x1end}" if x1end
-		#	system command
-		#	muted=true
-		#end
-
+		checkagain=false
 		curvecolor="red"
 	end
 end

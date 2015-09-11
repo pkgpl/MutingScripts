@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script name :
 
-for file in Shot.??????.su
+for file in Shot.*.su
 do
 	echo $file
 	org=${file}.org

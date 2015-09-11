@@ -89,7 +89,7 @@ pdir='./Polygon'
 mkdir(odir)
 mkdir(pdir)
 
-filename=from_param_sa('fin',nil)
+#filename=from_param_sa('fin',nil)
 outfile=from_param_sa('fout','muteshot')
 outfile=odir+'/'+outfile
 #puts outfile, pdir
