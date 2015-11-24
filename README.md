@@ -63,4 +63,4 @@ Use the same `first` and `last` used in Mute step. (`step`= increments of the fl
 
 ## Reference
 
-Kim, A., D. Ryu, W. Ha, C. Shin, 2015, [An efficient first arrival picking procedure for marine streamer data](http://www.tandfonline.com/doi/full/10.1080/12269328.2015.1047965#.VYy3kGAVd0c), Geosystem Engineering, Published Online.
+Kim, A., D. Ryu, W. Ha, C. Shin, 2015, [An efficient first arrival picking procedure for marine streamer data](http://www.tandfonline.com/doi/full/10.1080/12269328.2015.1047965#.VYy3kGAVd0c), Geosystem Engineering, 18(5), 251-258.
